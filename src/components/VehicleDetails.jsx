@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { updateVehicle } from '../services/mockApi';
+import { X, Pencil, Check, XCircle, MapPin, Car, ActivitySquare } from "lucide-react";
 import './VehicleDetails.css';
 
 const VehicleDetails = ({ vehicle, onClose, onUpdate }) => {
@@ -38,11 +39,15 @@ const VehicleDetails = ({ vehicle, onClose, onUpdate }) => {
   return (
     <div className="vehicle-details-panel">
       <div className="details-header">
-        <h2>Vehicle Details</h2>
-        <button onClick={onClose} className="close-btn">×</button>
+        <h2><Car size={20} className="header-icon" /> Vehicle Details</h2>
+
+        <button onClick={onClose} className="close-btn">
+          <X size={20} />
+        </button>
       </div>
 
       <div className="details-content">
+
         <div className="detail-section">
           <label>ID:</label>
           <span>{vehicle.id}</span>
@@ -91,12 +96,13 @@ const VehicleDetails = ({ vehicle, onClose, onUpdate }) => {
         </div>
 
         <div className="detail-section">
-          <label>Location:</label>
+          <label><MapPin size={16} className="icon-inline" /> Location:</label>
           <span>{vehicle.location}</span>
         </div>
 
         <div className="telemetry-section">
-          <h3>Telemetry</h3>
+          <h3><ActivitySquare size={18} className="icon-inline" /> Telemetry</h3>
+
           <div className="telemetry-grid">
             <div className="telemetry-item">
               <span className="telemetry-label">Speed:</span>
@@ -110,7 +116,7 @@ const VehicleDetails = ({ vehicle, onClose, onUpdate }) => {
         </div>
 
         <div className="activity-section">
-          <h3>Activity Logs</h3>
+          <h3><ActivitySquare size={18} className="icon-inline" /> Activity Logs</h3>
           <ul className="activity-list">
             {vehicle.activity.map((activity, index) => (
               <li key={index}>{activity}</li>
@@ -126,14 +132,15 @@ const VehicleDetails = ({ vehicle, onClose, onUpdate }) => {
                 disabled={saving}
                 className="save-btn"
               >
-                {saving ? 'Saving...' : 'Save'}
+                <Check size={16} /> {saving ? 'Saving...' : 'Save'}
               </button>
+
               <button
                 onClick={handleCancel}
                 disabled={saving}
                 className="cancel-btn"
               >
-                Cancel
+                <XCircle size={16} /> Cancel
               </button>
             </>
           ) : (
@@ -141,14 +148,14 @@ const VehicleDetails = ({ vehicle, onClose, onUpdate }) => {
               onClick={() => setIsEditing(true)}
               className="edit-btn"
             >
-              Edit
+              <Pencil size={16} /> Edit
             </button>
           )}
         </div>
+
       </div>
     </div>
   );
 };
 
 export default VehicleDetails;
-

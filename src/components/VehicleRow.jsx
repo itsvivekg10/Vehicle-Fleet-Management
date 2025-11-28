@@ -1,4 +1,5 @@
 import './VehicleRow.css';
+import { Car, MapPin, Clock3, Activity } from 'lucide-react';
 
 const VehicleRow = ({ vehicle, onSelect, isSelected }) => {
   function formatDate(dateString) {
@@ -6,10 +7,7 @@ const VehicleRow = ({ vehicle, onSelect, isSelected }) => {
   }
 
   function getStatusClass(status) {
-    if (status === 'online') {
-      return 'status-online';
-    }
-    return 'status-offline';
+    return status === 'online' ? 'status-online' : 'status-offline';
   }
 
   return (
@@ -18,18 +16,34 @@ const VehicleRow = ({ vehicle, onSelect, isSelected }) => {
       onClick={() => onSelect(vehicle)}
     >
       <td>{vehicle.id}</td>
-      <td className="vehicle-name">{vehicle.vehicleName}</td>
-      <td>{vehicle.model}</td>
+
+      <td className="vehicle-name">
+        <Car size={16} className="icon" />
+        {vehicle.vehicleName}
+      </td>
+
+      <td className="row-icon-col">
+        <Activity size={16} className="icon" />
+        {vehicle.model}
+      </td>
+
       <td>
         <span className={`status-badge ${getStatusClass(vehicle.status)}`}>
           {vehicle.status}
         </span>
       </td>
-      <td>{formatDate(vehicle.lastSeen)}</td>
-      <td>{vehicle.location}</td>
+
+      <td className="row-icon-col">
+        <Clock3 size={16} className="icon" />
+        {formatDate(vehicle.lastSeen)}
+      </td>
+
+      <td className="row-icon-col">
+        <MapPin size={16} className="icon" />
+        {vehicle.location}
+      </td>
     </tr>
   );
 };
 
 export default VehicleRow;
-
